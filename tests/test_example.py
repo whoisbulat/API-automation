@@ -9,3 +9,5 @@ class TestUsers(BaseTest):
     def test_create_user(self):
        self.users_api.get_products_list()
 
+конфликт
+
