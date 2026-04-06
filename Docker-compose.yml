@@ -10,20 +10,31 @@ services: # Описывает контейнеры, которые необхо
       dockerfile: Dockerfile # Имя Dockerfile
     volumes: # Позволяет монтировать директории из хост-системы в контейнер (аналог `-v`).
       - ./:/usr/workspace
-    command: /bin/sh -c "STAGE=$$STAGE pytest -sv -o log_cli=true -m $$MARKER" #
+    command: /bin/sh -c "STAGE=$$STAGE pytest -sv -o log_cli=true -n=$$THREADS -m=$$MARKER --alluredir=allure-results"#
     environment: # Определяет переменные окружения в контейнере.
       STAGE: ${STAGE}
       MARKER: ${MARKER:-smoke}
+      THREADS: ${THREADS:-2}
     tty: true # Для цветного вывода логов
 
-  regression_api:
+#  regression_api:
+#    image: api:v1
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    volumes:
+#      - ./:/usr/workspace
+#    command: /bin/sh -c "STAGE=$$STAGE pytest -sv -o log_cli=true"
+#    environment:
+#      STAGE: ${STAGE}
+#    tty: true
+
+  report:
     image: api:v1
     build:
       context: .
       dockerfile: Dockerfile
     volumes:
       - ./:/usr/workspace
-    command: /bin/sh -c "STAGE=$$STAGE pytest -sv -o log_cli=true"
-    environment:
-      STAGE: ${STAGE}
-    tty: true
+    command: /bin/sh -c "ls -la && allure generate allure-results --clean -o allure-report"
+    working_dir: /usr/workspace
