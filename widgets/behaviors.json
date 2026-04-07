@@ -1,4 +1,1 @@
-{
-  "total" : 0,
-  "items" : [ ]
-}
+{"total":1,"items":[{"uid":"133ea74c557c7133cf0a48f667ccad97","name":"Products","statistic":{"failed":1,"broken":0,"skipped":0,"passed":0,"unknown":0,"total":1}}]}

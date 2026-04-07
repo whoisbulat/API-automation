@@ -1,16 +1,1 @@
-[ {
-  "values" : [ "main" ],
-  "name" : "Branch"
-}, {
-  "values" : [ "9088cf16c62e93134c0cf161ef21cba124a8b70c" ],
-  "name" : "Commit"
-}, {
-  "values" : [ "dev" ],
-  "name" : "Stage"
-}, {
-  "values" : [ "smoke" ],
-  "name" : "Marker"
-}, {
-  "values" : [ "1" ],
-  "name" : "Threads"
-} ]
+[{"values":["main"],"name":"Branch"},{"values":["542287c7a1a0c166479bf8dc156b33094ecd3841"],"name":"Commit"},{"values":["dev"],"name":"Stage"},{"values":["smoke"],"name":"Marker"},{"values":["1"],"name":"Threads"}]

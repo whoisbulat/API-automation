@@ -1,5 +1,1 @@
-{
-  "uid" : "ab17fc5a4eb3bca4b216b548c7f9fcbc",
-  "children" : [ ],
-  "name" : "timeline"
-}
+{"uid":"ab17fc5a4eb3bca4b216b548c7f9fcbc","name":"timeline","children":[{"name":"1082a9e911ec","children":[{"name":"8-MainThread","children":[{"name":"Get products list","uid":"efd49ff904fbe953","parentUid":"ecb739b048beab61400440309f583145","status":"failed","time":{"start":1775580737874,"stop":1775580738106,"duration":232},"flaky":false,"newFailed":false,"newPassed":false,"newBroken":false,"retriesCount":0,"retriesStatusChange":false,"parameters":[],"tags":["smoke"]}],"uid":"ecb739b048beab61400440309f583145"}],"uid":"d01b5acf3097343625eaee7ae9aa07b2"}]}
