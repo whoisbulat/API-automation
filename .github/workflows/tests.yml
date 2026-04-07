@@ -5,73 +5,66 @@ on:
   workflow_dispatch:
     inputs:
       ENV:
-        description: "Choose environment"
+        description: 'Environment (dev or release)'
         required: true
-        type: environment
+        type: choice
+        default: 'dev'
+        options:
+          - 'dev'
+          - 'release'
 
       MARKER:
-        description: "Choose tests marker (smoke/regression)"
+        description: 'Tests marker'
         required: true
-        default: "smoke"
         type: choice
+        default: 'smoke'
         options:
           - smoke
           - regression
 
       THREADS:
-        description: "Parallel threads count"
+        description: 'Parallel threads'
         required: false
         type: choice
-        default: "2"
+        default: '1'
         options:
-          - "2"
-          - "5"
+          - '1'
+          - '3'
 
 jobs:
   api-tests:
     runs-on: ubuntu-latest
-    environment: ${{ inputs.ENV }}  # ✅ Привязка джоба к выбранному environment
+    environment: ${{ inputs.ENV }}   # 👈 ключевая строка — привязка к окружению
 
     steps:
-      - uses: actions/checkout@v2
-
-      - uses: actions/checkout@v2
-        with:
-          ref: gh-pages
-          path: ./.github/gh-pages
+      - uses: actions/checkout@v4
 
       - name: Prepare Allure environment
         run: |
           mkdir -p allure-results
           echo "Branch=${{ github.ref_name }}" > allure-results/environment.properties
           echo "Commit=${{ github.sha }}" >> allure-results/environment.properties
-          echo "Stage=${{ secrets.STAGE }}" >> allure-results/environment.properties
+          echo "Stage=${{ inputs.ENV }}" >> allure-results/environment.properties
           echo "Marker=${{ inputs.MARKER }}" >> allure-results/environment.properties
           echo "Threads=${{ inputs.THREADS }}" >> allure-results/environment.properties
 
       - name: Run tests via docker-compose
         env:
-          STAGE: ${{ secrets.STAGE }}
+          STAGE: ${{ inputs.ENV }}
           MARKER: ${{ inputs.MARKER }}
           THREADS: ${{ inputs.THREADS }}
+          API_TOKEN: ${{ secrets.API_TOKEN }}   # 👈 GitHub  подставит нужный токен из окружения
         run: |
           docker compose up smoke-api-test
 
-      - name: Copy Allure history
-        run: |
-          mkdir -p allure-results/history
-          if [ -d "./.github/gh-pages/history" ]; then
-            cp -R ./.github/gh-pages/history/* allure-results/history/
-          fi
-
-      - name: Generate Allure-report
+      - name: Generate Allure report
         run: |
           docker compose up report
 
-      - name: Deploy to Github Pages
+      - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4.5.0
         with:
-          token: ${{ secrets.CI_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
           folder: allure-report
           clean: false

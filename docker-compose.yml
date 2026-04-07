@@ -1,22 +1,18 @@
-
-
-
-
-services: # Описывает контейнеры, которые необходимо запустить
-  smoke-api-test: #
-    image: api:v1 # Указывает образ Docker, на основе которого будет создан контейнер.
-    build: #  Содержит инструкции по сборке образа, если он несуществует локально.
-      context: . # Директория, в которой находится Dockerfile
-      dockerfile: Dockerfile # Имя Dockerfile
-    volumes: # Позволяет монтировать директории из хост-системы в контейнер (аналог `-v`).
+services:
+  smoke-api-test:
+    image: api:v1
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
       - ./:/usr/workspace
-    command: /bin/sh -c "STAGE=$$STAGE pytest -sv -o log_cli=true -n=$$THREADS -m=$$MARKER --alluredir=allure-results"#
-    environment: # Определяет переменные окружения в контейнере.
+    command: /bin/sh -c "STAGE=$$STAGE API_TOKEN=$$API_TOKEN pytest -sv -o log_cli=true -n=$$THREADS -m=$$MARKER --alluredir=allure-results"
+    environment:
       STAGE: ${STAGE}
       MARKER: ${MARKER:-smoke}
-      THREADS: ${THREADS:-2}
-    tty: true # Для цветного вывода логов
-
+      THREADS: ${THREADS:-1}
+      API_TOKEN: ${API_TOKEN}
+    tty: true
 
   report:
     image: api:v1
@@ -25,8 +21,35 @@ services: # Описывает контейнеры, которые необхо
       dockerfile: Dockerfile
     volumes:
       - ./:/usr/workspace
-    command: /bin/sh -c "ls -la && allure generate allure-results --clean -o allure-report"
+    command: /bin/sh -c "allure generate allure-results --clean -o allure-report"
     working_dir: /usr/workspace
+
+
+#services: # Описывает контейнеры, которые необходимо запустить
+#  smoke-api-test: #
+#    image: api:v1 # Указывает образ Docker, на основе которого будет создан контейнер.
+#    build: #  Содержит инструкции по сборке образа, если он несуществует локально.
+#      context: . # Директория, в которой находится Dockerfile
+#      dockerfile: Dockerfile # Имя Dockerfile
+#    volumes: # Позволяет монтировать директории из хост-системы в контейнер (аналог `-v`).
+#      - ./:/usr/workspace
+#    command: /bin/sh -c "STAGE=$$STAGE pytest -sv -o log_cli=true -n=$$THREADS -m=$$MARKER --alluredir=allure-results"#
+#    environment: # Определяет переменные окружения в контейнере.
+#      STAGE: ${STAGE}
+#      MARKER: ${MARKER:-smoke}
+#      THREADS: ${THREADS:-2}
+#    tty: true # Для цветного вывода логов
+#
+#
+#  report:
+#    image: api:v1
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    volumes:
+#      - ./:/usr/workspace
+#    command: /bin/sh -c "ls -la && allure generate allure-results --clean -o allure-report"
+#    working_dir: /usr/workspace
 
 
 
