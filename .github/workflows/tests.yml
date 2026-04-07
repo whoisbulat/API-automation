@@ -9,15 +9,15 @@ on:
         required: true
         type: environment # ? Важно: это тип environment!
 
-#      BROWSER:
-#        description: "Select the browser"
-#        required: true
-#        default: "chrome"
-#        type: choice
-#        options:
-#          - chrome
-#          - firefox
-#          - safari
+      BROWSER:
+        description: "Select the browser"
+        required: true
+        default: "chrome"
+        type: choice
+        options:
+          - chrome
+          - firefox
+          - safari
 
       MARKER:
         description: "Choose microservice to test"
@@ -63,7 +63,7 @@ jobs:
       # Запуск тестов
       - name: Run tests via docker-compose
         env:
-#          BROWSER: ${{ inputs.BROWSER }}
+          BROWSER: ${{ inputs.BROWSER }}
           STAGE: ${{ secrets.STAGE }}
         run: |
           docker compose up tests
