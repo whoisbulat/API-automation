@@ -2,15 +2,15 @@
   "values" : [ "main" ],
   "name" : "Branch"
 }, {
-  "values" : [ "6fa64020e6b7c33da2bec14976c10fa8c91d0ace" ],
+  "values" : [ "9088cf16c62e93134c0cf161ef21cba124a8b70c" ],
   "name" : "Commit"
 }, {
-  "values" : [ "https://aqa-proka4.org/sandbox/api" ],
+  "values" : [ "dev" ],
   "name" : "Stage"
 }, {
   "values" : [ "smoke" ],
   "name" : "Marker"
 }, {
-  "values" : [ "2" ],
+  "values" : [ "1" ],
   "name" : "Threads"
 } ]
