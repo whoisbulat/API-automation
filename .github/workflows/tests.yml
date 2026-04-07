@@ -57,13 +57,13 @@ jobs:
           mkdir -p allure-results
           echo "Branch=${{ github.ref_name }}" > allure-results/environment.properties
           echo "Commit=${{ github.sha }}" >> allure-results/environment.properties
-#          echo "Browser=${{ inputs.BROWSER }}" >> allure-results/environment.properties
+          echo "Browser=${{ inputs.BROWSER }}" >> allure-results/environment.properties
           echo "Stage=${{ secrets.STAGE }}" >> allure-results/environment.properties
 
       # Запуск тестов
       - name: Run tests via docker-compose
         env:
-#          BROWSER: ${{ inputs.BROWSER }}
+          BROWSER: ${{ inputs.BROWSER }}
           STAGE: ${{ secrets.STAGE }}
         run: |
           docker compose up tests
