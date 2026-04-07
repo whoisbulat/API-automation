@@ -57,7 +57,7 @@ jobs:
           mkdir -p allure-results
           echo "Branch=${{ github.ref_name }}" > allure-results/environment.properties
           echo "Commit=${{ github.sha }}" >> allure-results/environment.properties
-#          echo "Browser=${{ inputs.BROWSER }}" >> allure-results/environment.properties
+          echo "Browser=${{ inputs.BROWSER }}" >> allure-results/environment.properties
           echo "Stage=${{ secrets.STAGE }}" >> allure-results/environment.properties
 
       # Запуск тестов
