@@ -9,15 +9,15 @@ on:
         required: true
         type: environment # ? Важно: это тип environment!
 
-#      BROWSER:
-#        description: "Select the browser"
-#        required: true
-#        default: "chrome"
-#        type: choice
-#        options:
-#          - chrome
-#          - firefox
-#          - safari
+      BROWSER:
+        description: "Select the browser"
+        required: true
+        default: "chrome"
+        type: choice
+        options:
+          - chrome
+          - firefox
+          - safari
 
       MARKER:
         description: "Choose microservice to test"
