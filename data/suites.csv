@@ -1,2 +1,2 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","232","Get products list","tests","Tue Apr 07 16:52:17 UTC 2026","failed","Tue Apr 07 16:52:18 UTC 2026","TestUsers","test_example","",""
+"","382","Get products list","tests","Tue Apr 07 17:19:54 UTC 2026","failed","Tue Apr 07 17:19:55 UTC 2026","TestUsers","test_example","",""
