@@ -1,1 +1,1 @@
-[{"values":["main"],"name":"Branch"},{"values":["6e729d2d3b44b99a4671244ac6c54e9b3d7a7585"],"name":"Commit"},{"values":["dev"],"name":"Stage"},{"values":["smoke"],"name":"Marker"},{"values":["1"],"name":"Threads"}]
+[{"values":["main"],"name":"Branch"},{"values":["6e729d2d3b44b99a4671244ac6c54e9b3d7a7585"],"name":"Commit"},{"values":["dev"],"name":"Stage"},{"values":["regression"],"name":"Marker"},{"values":["1"],"name":"Threads"}]
